@@ -9,12 +9,24 @@
   <EditText
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:id="@+id/locationSearchBox"/>
+      android:layout_marginTop="20dp"
+      android:id="@+id/locationSearchBox"
+      android:hint="Enter Location"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search stores"
+        android:layout_marginTop="20dp"
+        android:text="Search Trucks nearby"
         android:onClick="openSearchList"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Currently for places near San fransisco only!"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"/>
 
 </LinearLayout>

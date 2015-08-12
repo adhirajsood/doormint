@@ -28,33 +28,11 @@ public class Home extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
     public void openSearchList(View view){
+        String queryUser = SearchQuery.getText().toString().trim();
 
-        if (SearchQuery!=null){
-            String queryUser = SearchQuery.getText().toString();
+        if (queryUser!=null &&!queryUser.equals("")){
 
             Geocoder geocoder = new Geocoder(this);
             List<Address> address;
@@ -70,45 +48,20 @@ public class Home extends AppCompatActivity {
                     Intent i = new Intent(this,ListSearchStores.class);
                     i.putExtra("lat",String.valueOf(latitude));
                     i.putExtra("long",String.valueOf(longitude));
+                    SearchQuery.setText("");
                     startActivity(i);
                 }else {
-                    Toast.makeText(this,"No location found",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,"Location not found!",Toast.LENGTH_SHORT).show();
                 }
                 //APImanager.getInstance().sendAsyncCall("GET","37.78","-122.39",this);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }else {
-            Toast.makeText(this,"Please enter a location first",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please enter a location first!",Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    private class AsynchClassHandler extends AsyncTask<Void,Void,String>{
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
 
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-
-            try {
-
-            } catch (Exception e) {
-                //Log.e("AppsmythRestApiManager", "doInBackground : Failed to process "+resource+ " "+requestMethod, e);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            //callback.onSuccessResponse(reply);
-
-        }
-    }
-    //data.sfgov.org/resource/rqzj-sfat.json
 }

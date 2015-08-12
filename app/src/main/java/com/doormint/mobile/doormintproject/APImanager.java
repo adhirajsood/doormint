@@ -78,13 +78,13 @@ public class APImanager implements IAsyncCallback {
         @Override
         protected String doInBackground(Void... params) {
             if(!initialized){
-                Log.e("AppsmythRestApiManager", "doInBackground : Request not initialized. Cancelling ");
+                Log.e("API manager", "doInBackground : Request not initialized. Cancelling ");
                 return null;
             }
             try {
                 sendJSONRequest();
             } catch (Exception e) {
-                Log.e("AppsmythRestApiManager", "doInBackground : Failed to process "+ " "+requestMethod, e);
+                Log.e("API manager", "doInBackground : Failed to process "+ " "+requestMethod, e);
             }
             return null;
         }
@@ -102,11 +102,7 @@ public class APImanager implements IAsyncCallback {
 
             String url = baseUrl;
             if(longitude!=null && lat!=null){
-                /*String latitude = URLEncoder.encode(lat,"utf-8");
-                String slong = URLEncoder.encode(longitude,"utf-8");
-                String query = URLEncoder.encode("$where=within_circle(location,"+latitude+","+slong+",100)", "utf-8");
-*/
-                url += "?$where=within_circle(location,"+lat+","+longitude+",1000)";
+                       url += "?$where=within_circle(location,"+lat+","+longitude+",1000)";
             }
             System.out.println("this is "+ url);
             URL obj = new URL(url);
